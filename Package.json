@@ -1,0 +1,19 @@
+{
+  "name": "4inarow",
+  "version": "0.0.2",
+  "description": "Multiplayer 4inarow",
+  "author": "Benjamin August <benji889@yahoo.de>",
+  "contributors": [
+    "John Slegers (http://www.johnslegers.com/)",
+    "Benjamin August <benji889@yahoo.de>"
+    ],
+  "repository" :
+  { "type" : "git"
+  , "url" : "http://github.com/TheBenji/4inarow.git"
+  },
+  "dependencies": {
+    "connect": "2.x.x",
+    "socket.io": "0.9.x"
+  },
+  "engine": "node >= 0.10.20"
+}
