@@ -30,7 +30,7 @@
         return testClass(i,j,players[current]);
     },                        
     changePlayer = function(){
-        element("c").innerHTML = players[current = (current + 1) % 2];
+        element("c").innerHTML = players[current];
     },                           
     horizontalWon = function(i,j){
         for(var min=j-1;min>0;min--)if(!sameColor(i,min))break;					
@@ -64,15 +64,12 @@
     addCellBehavior = function(i,j){
         cell(i,j).onclick = function(j){
             return function(){
-                if(!finished){
+                if(!finished && current === me){
                     for (var t = 6;t>0;t--){
                         if(testClass(t,j,'')){
-                            colorField(t,j,players[current]);
+                            socket.emit('turn', {x: t, y: j});
                             if(horizontalWon(t,j) || verticalWon(t,j) || diagonalLtrWon(t,j) || diagonalRtlWon(t,j)){
-                                finished = true;
-                                newGame(wonMessage.replace("%s",players[current]));
-                            } else {
-                                changePlayer();
+                                socket.emit('won');
                             }
                             break;
                         }
@@ -83,12 +80,42 @@
     },
     players = [value("a"),value("b")],         
     current = 0,
+    me = 0,
     newGameMessage = value("n"),
     wonMessage = value("w"),
-    finished;
+    finished = true,
+    socket = io.connect("http://"+window.location.hostname);
+        
+    socket.on('connected', function (data) {
+        //use -1 for random
+        socket.emit('player', {myId: -1, enemyId: -1});
+    });
+
+    socket.on('started', function (data) {
+        finished = false;
+        me = data;
+        element("msg").innerHTML = 'You are the ' + players[me]  +' player';
+        element("turn").style.display = 'block';
+    });
+
+    socket.on('winner', function (data) {
+        finished = true;
+        alert(players[data]  +' player won!');
+    });
+
+    socket.on('newTurn', function (data) {
+        current = data;
+        changePlayer();
+    });
+
+    socket.on('turn', function(data) {
+        colorField(data.x,data.y,players[current]);
+    });
+
     start();
     forAllCells(addCellBehavior);
     element("r").onclick = function(){
         newGame(newGameMessage)
     };
 })(document);
+

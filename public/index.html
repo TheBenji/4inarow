@@ -10,9 +10,10 @@
         <span id="a">red</span>
         <span id="b">yellow</span>
         <span id="n">Are you sure you want to start a new game?</span>
-        <span id="w">The %s player won.
-Do you want to play a new game?</span>
-        <div id="game">It's the <span id="c"></span>&nbsp;player's move.
+        <span id="w">The %s player won.</span>
+        <div id="game">
+        <div id="msg">Waiting for Player</div>
+        <div id="turn" style="display: none;"> It's the <span id="c"></span>&nbsp;player's move.</div>
             <table id="gameboard">
                 <tr>
                     <td id="c-1-1"></td>
@@ -73,6 +74,10 @@ Do you want to play a new game?</span>
             <div class="right leg"></div>
             <button id="r">New game</button>
         </div>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="code.min.js"></script>
+        <script>
+
+        </script>
     </body>
 </html>

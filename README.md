@@ -3,13 +3,23 @@
 
 ##Summary
 
-A simple implementation of a two-player four-in-a-row game.
+A simple implementation of a two-player four-in-a-row game with node.js/socket.io.
 
 The game should work in all browsers, however you need a modern browser for an optimal layout.
 
+##Installation
+
+Clone the repo
+
+`npm install`
+`node app.js`
+
+Be happy and play
+
+
 ##Demo
 
-For a live demo, go to [http://jslegers.github.com/4inarow/](http://jslegers.github.com/4inarow/).
+A Multiplayer demo is at the moment not available
 
 This implementation is MIT licensed.
 
