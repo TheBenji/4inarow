@@ -67,6 +67,7 @@
                 if(!finished && current === me){
                     for (var t = 6;t>0;t--){
                         if(testClass(t,j,'')){
+                            current++;
                             socket.emit('turn', {x: t, y: j});
                             if(horizontalWon(t,j) || verticalWon(t,j) || diagonalLtrWon(t,j) || diagonalRtlWon(t,j)){
                                 socket.emit('won');
