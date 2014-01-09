@@ -67,11 +67,7 @@
                 if(!finished && current === me){
                     for (var t = 6;t>0;t--){
                         if(testClass(t,j,'')){
-                            current++;
                             socket.emit('turn', {x: t, y: j});
-                            if(horizontalWon(t,j) || verticalWon(t,j) || diagonalLtrWon(t,j) || diagonalRtlWon(t,j)){
-                                socket.emit('won');
-                            }
                             break;
                         }
                     }
@@ -88,8 +84,7 @@
     socket = io.connect("http://"+window.location.hostname);
         
     socket.on('connected', function (data) {
-        //use -1 for random
-        socket.emit('player', {myId: -1, enemyId: -1});
+        socket.emit('player', {myId: myId, enemyId: enemyId});
     });
 
     socket.on('started', function (data) {

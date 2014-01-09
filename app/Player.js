@@ -8,24 +8,21 @@ var Player = function(socket, playerId, enemyId) {
 	this.playerId = playerId;
 	this.enemyId = enemyId;
 	this.game;
+	this.plaer;
 
 	this._socket = socket;
 
 	this._socket.on('disconnect', function() {
 		if(self.game) {
-  			self.game.over(self, false);
+  			self.game.over((self.player+1)%2);
   		} else {
   			self.emit('disconnect');
   		}
 	});
 
 	this._socket.on('turn', function(data) {
-		self.game.move(data);
+		self.game.move(data, self.player);
 	});
-
-	this._socket.on('won', function() {
-		self.game.over(self, true);
-	})
 }
 
 util.inherits(Player, EventEmitter);

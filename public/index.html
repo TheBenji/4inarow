@@ -74,10 +74,14 @@
             <div class="right leg"></div>
             <button id="r">New game</button>
         </div>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="code.min.js"></script>
         <script>
-
+            //That's actually a grouping feature, match just players with a fitting ID
+            //If you use for every player the same it just match up "first come first serve"
+            //If you use actual ID's it match up exactly this two players
+            var myId = 1,
+            enemyId = 1;
         </script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="code.js"></script>
     </body>
 </html>
